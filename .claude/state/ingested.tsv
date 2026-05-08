@@ -1,0 +1,4 @@
+# DeDao-100 ingest state — append-only, written by /dedao-ingest.
+# Format: <raw_path>\t<YYYY-MM-DD>\t<source_page>
+# To diff: comm -23 <(find raw -maxdepth 1 -name '*.md' | sort) <(awk -F'\t' '$1!~/^#/{print $1}' .claude/state/ingested.tsv | sort)
+raw/叙事：这个宇宙的第一性原理 - 得到APP.md	2026-05-08	来源/叙事：这个宇宙的第一性原理.md

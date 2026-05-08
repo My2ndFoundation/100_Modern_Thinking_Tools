@@ -64,6 +64,7 @@ Standard sections by type:
 - 引用人物与著作 (each linked)
 - 与其他课程的连接
 - 我的反应 (left blank for the user)
+- 原文 (verbatim raw lecture body — see §5 「原文 insertion」for what to strip and what to keep. The wiki publishes as static HTML; `raw/` is not exposed, so 来源 pages MUST be self-contained.)
 
 ## 4. 命名约定
 
@@ -76,10 +77,12 @@ Standard sections by type:
 
 Trigger: user drops a file in `raw/` and says "ingest" (or names the file).
 
-1. Read the source end-to-end.
-2. Extract: tools introduced, concepts referenced, people named, books/papers cited, course section, lesson's main argument.
-3. **Checkpoint**: report extracted entities + a one-paragraph summary in chat. Wait for the user to redirect emphasis or scope.
-4. Write `来源/<lesson-title>.md` per the template above. All entities as `[[wikilinks]]`.
+1. Read the source end-to-end — both the **frontmatter** (clipping metadata) and the body.
+2. Extract:
+   - Tools introduced, concepts referenced, people named, books/papers cited, course section, lesson's main argument (from the body).
+   - **Frontmatter back-reference wikilinks** (e.g. `author: - "[[万维钢·现代思维⼯具100讲]]"`) — collect the EXACT string as it appears, including any special characters (e.g. CJK radical `⼯` U+2F2F vs. normal `工` U+5DE5). Do NOT normalize — instead, add the raw spelling as an alias on the corresponding 著作 page so Obsidian resolves these backlinks. Multiple raw files share these backlinks; one alias fixes all of them.
+3. **Checkpoint**: report extracted entities + frontmatter backlinks + a one-paragraph summary in chat. Wait for the user to redirect emphasis or scope.
+4. Write `来源/<lesson-title>.md` per the template above. All entities as `[[wikilinks]]`. Insert the raw body verbatim under `## 原文` per the rules below.
 5. For each entity:
    - **New** → create a stub with: frontmatter + the type-specific top-level section headings (from §3) left empty, populating only `一句话定义` and `## 出现在` (which lists this source). Stubs grow into full pages as more sources are ingested.
    - **Existing** → append source under `## 出现在`; update relevant content sections (e.g., `详细解释` for concepts, `何时使用` / `操作步骤` for tools, `主要贡献` for people) if the source adds nuance; if the source contradicts an existing claim, add `> ⚠️ 与 [[…]] 中的说法不同：…` rather than overwriting.
@@ -130,15 +133,90 @@ All type-specific section headings (`来源`, `何时使用`, etc., per §3) are
 
 8. Report to user: number of pages touched, anything to revise.
 
+### 原文 insertion (Step 4)
+
+The 来源 page must be self-contained because static-HTML publish does not expose `raw/`. Insert the verbatim raw body under a final `## 原文` section, with a small provenance preamble.
+
+**Strip:**
+- Raw frontmatter (lines between `---` delimiters) — clipping metadata, not content.
+- The duplicate title+duration line at the very top of the body (e.g. `叙事：这个宇宙的第一性原理 12分56秒`).
+- The `转述：怀沙AI` line.
+- The App UI line `已添加到笔记`.
+
+**Keep verbatim** (no rewording, no fixing typos):
+- The lecture body, paragraph breaks, `✵` separators.
+- 收束小诗.
+- 注释 / footnote block — promote `注释` to `### 注释` for HTML rendering.
+- 划重点 — promote to `### 划重点`.
+
+**Image references** — do NOT keep the external `piccdn2.umiwi.com` URL inline. Localize per the 图片本地化 subsection below. The CDN may expire; static-HTML publish needs local files.
+
+**Preamble (you write):**
+```
+## 原文
+
+> 来源：<source URL from raw frontmatter>
+> 出处：[[现代思维工具100讲]] · <duration>　<presenter line if present>
+```
+
+### 图片本地化 (Step 4)
+
+External CDN images in raw bodies (e.g. `https://piccdn2.umiwi.com/...`) MUST be downloaded to the vault and the body rewritten to reference local paths. Reasons: (a) CDN URLs can expire, (b) static-HTML publish needs self-contained assets.
+
+**Path convention:** `assets/<lesson-title>/NN.<ext>` (root-level `assets/`, one subfolder per source).
+
+- `<lesson-title>` — the same string as the 来源 page filename, without the `.md` extension. Chinese characters are fine; Obsidian and Quartz both resolve unicode paths.
+- `NN` — sequential, zero-padded, in document order: `01`, `02`, `03`, ...
+- `<ext>` — preserve from URL (`.png`, `.webp`, `.jpeg`). Do not transcode.
+
+**Download recipe** (run from project root):
+
+```bash
+mkdir -p "assets/<lesson-title>"
+[ -f "assets/<lesson-title>/01.png" ] || curl -fsSL --create-dirs \
+  -o "assets/<lesson-title>/01.png" \
+  "<url>"
+```
+
+The `[ -f ... ] ||` guard makes it idempotent (re-running ingest won't re-download).
+
+**Reference rewrite in `## 原文`:** replace the original `![](https://piccdn2…)` with:
+
+```markdown
+![](assets/<lesson-title>/NN.<ext>)
+<!-- src: <original URL> -->
+```
+
+The `<!-- src: ... -->` comment preserves provenance so you (or the user) can re-fetch later. The comment doesn't render in HTML.
+
+**Failure handling:** if `curl` fails (404, timeout, etc.), do NOT silently drop the image. Keep the original URL inline AND prepend a flag:
+
+```markdown
+<!-- ⚠️ download failed: <url> -->
+![](<url>)
+```
+
+Surface the failure list in Step 9 report.
+
+**Two `assets/` folders, two purposes** (no overlap):
+| Folder | Writer | Purpose |
+|---|---|---|
+| `raw/assets/` | User (Obsidian hotkey) | User's personal reading copies. LLM does not write here. |
+| `assets/` (root) | LLM (this step) | Canonical, vault-rooted, referenced by `来源` pages. Published in static HTML. |
+
 ### Edge cases
 
 - Source unparseable → stop, report, write nothing.
 - Ambiguous entity → fuzzy-match aliases first; ask user if unresolved.
 - Contradicting an existing claim → never silently overwrite. Use `⚠️` flag, surface in Step 8.
+- Frontmatter back-reference uses a special character (e.g. `⼯` U+2F2F instead of `工` U+5DE5) → add the special-character form as an alias on the target wiki page; never silently rewrite to the "correct" character. The raw file is the authority on its own backlinks.
 
 ### Image handling
 
-The user binds Obsidian's "Download attachments for current file" command to a hotkey; downloaded images land in `raw/assets/`. You don't auto-trigger this. When images exist locally, you may view them for additional context.
+Two distinct flows; see also「图片本地化」above.
+
+- **User-side reading** — User binds Obsidian's "Download attachments for current file" command to a hotkey; downloaded images land in `raw/assets/`. You don't auto-trigger this. When images exist locally there, you may view them for context. Never write to `raw/assets/`.
+- **LLM-side ingest** — During Step 4, you download every external image referenced in the raw body to `assets/<lesson-title>/NN.<ext>` and rewrite the `## 原文` body to point at local paths. See「图片本地化」for the exact recipe.
 
 ## 6. 工作流：query
 
@@ -222,6 +300,10 @@ Event types: `ingest`, `query`, `lint`, `synthesis-filed`, `schema-update`.
 - Create a duplicate page for an entity that already exists under an alias.
 - Skip the Step 3 ingest checkpoint.
 - Web-search without asking the user first.
+- Skip the `## 原文` insertion in 来源 pages — they must be self-contained for static-HTML publish.
+- Normalize special characters in raw frontmatter backlinks (e.g. `⼯` → `工`). Add the raw form as an alias instead.
+- Leave external CDN image URLs (e.g. `piccdn2.umiwi.com`) inline in `## 原文` — always localize to `assets/<lesson-title>/NN.<ext>` per §5「图片本地化」.
+- Write into `raw/assets/` — that folder is for the user's Obsidian hotkey only. LLM-managed images go to root `assets/`.
 
 ## 10. 与你协作
 
