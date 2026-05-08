@@ -1,0 +1,9 @@
+{
+  "userIgnoreFilters": [
+    "raw/",
+    "_meta/",
+    "CLAUDE.md",
+    "README.md",
+    "log.md"
+  ]
+}
