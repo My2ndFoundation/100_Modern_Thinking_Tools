@@ -83,6 +83,40 @@ Trigger: user drops a file in `raw/` and says "ingest" (or names the file).
 5. For each entity:
    - **New** → create a stub with: frontmatter + the type-specific top-level section headings (from §3) left empty, populating only `一句话定义` and `## 出现在` (which lists this source). Stubs grow into full pages as more sources are ingested.
    - **Existing** → append source under `## 出现在`; update relevant content sections (e.g., `详细解释` for concepts, `何时使用` / `操作步骤` for tools, `主要贡献` for people) if the source adds nuance; if the source contradicts an existing claim, add `> ⚠️ 与 [[…]] 中的说法不同：…` rather than overwriting.
+
+#### Stub example
+
+When ingesting a new source that introduces 叙事 as a tool, the stub `工具/叙事.md` looks like:
+
+```markdown
+---
+type: tool
+aliases: [narrative]
+created: 2026-05-08
+updated: 2026-05-08
+sources: 1
+tags: [板块/基本世界观]
+---
+
+## 一句话定义
+对互相关联的一系列事实的连贯描述。
+
+## 来源
+
+## 何时使用
+
+## 操作步骤
+
+## 例子
+
+## 相关工具
+
+## 出现在
+- [[叙事：这个宇宙的第一性原理]]
+```
+
+All type-specific section headings (`来源`, `何时使用`, etc., per §3) are present as scaffolding even though most are empty. Subsequent ingests fill them in.
+
 6. Update `index.md` with new entries under their type section.
 7. Append to `log.md`:
    ```
@@ -91,6 +125,9 @@ Trigger: user drops a file in `raw/` and says "ingest" (or names the file).
    - 更新：<list of updated pages>
    - 备注：<optional notes>
    ```
+
+   Note: `来源(1)` is always exactly `1` because each ingest creates one source page; the other type counts vary.
+
 8. Report to user: number of pages touched, anything to revise.
 
 ### Edge cases

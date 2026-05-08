@@ -13,4 +13,4 @@
 - Wrote log.md (this file)
 - Spec: `_meta/specs/2026-05-08-llm-wiki-instantiation-design.md`
 - Plan: `_meta/plans/2026-05-08-llm-wiki-instantiation.md`
-- Sources in raw/ awaiting ingest: 1 (`叙事：这个宇宙的第一性原理 - 得到APP.md`)
+- Sources in raw/ awaiting first ingest (count varies; ingested individually on user trigger).
