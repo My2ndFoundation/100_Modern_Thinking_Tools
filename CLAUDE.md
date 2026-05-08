@@ -55,7 +55,7 @@ Standard sections by type:
 - 作者: `[[…]]`
 - 简介
 - 核心论点
-- 在哪些课程被引用
+- 在哪些课程出现
 
 ### `来源/<lesson-title>.md`
 - 一句话总结
@@ -70,6 +70,7 @@ Standard sections by type:
 - Page titles in Chinese (中文). Filenames match titles.
 - Cross-language names go in `aliases: []`. Example: `人物/卡尔·弗里斯顿.md` has `aliases: [Karl Friston, 弗里斯顿]`.
 - One entity = one page. Before creating a new page, search aliases across the wiki for existing matches. If you find a match under a different name, link to it — never duplicate.
+- Frontmatter `type:` values are English enums (`tool | concept | person | book | source`) — stable, queryable. Folder names and human-readable counts in logs/reports use Chinese (`工具/`, `工具(N)`). The two systems coexist by design.
 
 ## 5. 工作流：ingest
 
@@ -80,13 +81,13 @@ Trigger: user drops a file in `raw/` and says "ingest" (or names the file).
 3. **Checkpoint**: report extracted entities + a one-paragraph summary in chat. Wait for the user to redirect emphasis or scope.
 4. Write `来源/<lesson-title>.md` per the template above. All entities as `[[wikilinks]]`.
 5. For each entity:
-   - **New** → create stub: frontmatter + 一句话定义 + `## 出现在` listing this source.
-   - **Existing** → append source under `## 出现在`; refine 详细解释 if the source adds nuance; if the source contradicts an existing claim, add `> ⚠️ 与 [[…]] 中的说法不同：…` rather than overwriting.
+   - **New** → create a stub with: frontmatter + the type-specific top-level section headings (from §3) left empty, populating only `一句话定义` and `## 出现在` (which lists this source). Stubs grow into full pages as more sources are ingested.
+   - **Existing** → append source under `## 出现在`; update relevant content sections (e.g., `详细解释` for concepts, `何时使用` / `操作步骤` for tools, `主要贡献` for people) if the source adds nuance; if the source contradicts an existing claim, add `> ⚠️ 与 [[…]] 中的说法不同：…` rather than overwriting.
 6. Update `index.md` with new entries under their type section.
 7. Append to `log.md`:
    ```
    ## [YYYY-MM-DD] ingest | <lesson title>
-   - 新建：工具(N) 概念(N) 人物(N) 著作(N)
+   - 新建：来源(1) 工具(N) 概念(N) 人物(N) 著作(N)
    - 更新：<list of updated pages>
    - 备注：<optional notes>
    ```
@@ -109,7 +110,7 @@ User asks a question in chat.
 1. Read `index.md` first to find candidate pages.
 2. Read those pages.
 3. Synthesize an answer with `[[wikilinks]]` to every page used.
-4. Offer to file the answer back if synthesis is **non-trivial**: ≥200 words OR connects ≥2 concepts in a way not already documented.
+4. Offer to file the answer back as a wiki page if synthesis is **non-trivial**: ≥200 words OR connects ≥2 concepts in a way not already documented. Default target is `概念/<descriptive-name>.md` with `type: concept`; pick a different folder only if the synthesis is fundamentally about a person/book/tool. Filed pages get their own `index.md` entry and a `synthesis-filed` log entry.
 
 ### Output formats (pick based on the question)
 
