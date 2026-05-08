@@ -1,6 +1,8 @@
 ---
 name: dedao-ingest
 description: Use when the user wants to ingest a raw 得到《现代思维工具课》clipping into the wiki. Triggers on "ingest"、"处理这篇"、"消化这节课", or when the user supplies a path under raw/ in the DeDao-100 project.
+model: claude-opus-4-7
+effort: high
 ---
 
 # DeDao-100 Ingest Workflow

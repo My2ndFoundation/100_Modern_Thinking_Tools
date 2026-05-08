@@ -1,6 +1,8 @@
 ---
 name: dedao-scan
 description: Use when the user wants to find raw/ files that haven't been ingested yet, or asks "扫一下 raw"、"还有哪些没处理"、"批量 ingest"、"check for new sources"。Discovers new clippings in the DeDao-100 raw/ folder by diffing against .claude/state/ingested.tsv, then dispatches /dedao-ingest one file at a time.
+model: claude-sonnet-4-6
+effort: low
 ---
 
 # DeDao-100 Raw Scanner
