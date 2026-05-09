@@ -1,6 +1,6 @@
 ---
 name: dedao-scan
-description: Use when the user wants to find raw/ files that haven't been ingested yet, or asks "扫一下 raw"、"还有哪些没处理"、"批量 ingest"、"check for new sources"。Discovers new clippings in the DeDao-100 raw/ folder by diffing against .claude/state/ingested.tsv, then dispatches /dedao-ingest one file at a time.
+description: Use when the user wants to find raw/ files that haven't been ingested yet, or asks "扫一下 raw"、"还有哪些没处理"、"批量 ingest"、"check for new sources"。Discovers new clippings in the DeDao-100 raw/ folder by diffing against .ingested.tsv, then dispatches /dedao-ingest one file at a time.
 model: claude-sonnet-4-6
 effort: low
 ---
@@ -10,10 +10,10 @@ effort: low
 ## Overview
 
 Two-job skill:
-1. **Discover** — diff `raw/*.md` against `.claude/state/ingested.tsv`; surface the unprocessed files.
+1. **Discover** — diff `raw/*.md` against `.ingested.tsv`; surface the unprocessed files.
 2. **Dispatch** — for each new file, hand control to `/dedao-ingest`, which runs its own Step 3 user-checkpoint per source.
 
-The state file (`.claude/state/ingested.tsv`) is the single source of truth for "已处理"。It is written exclusively by `/dedao-ingest`. This skill only reads it.
+The state file (`.ingested.tsv`) is the single source of truth for "已处理"。It is written exclusively by `/dedao-ingest`. This skill only reads it.
 
 ## The Non-Negotiable Rules
 
@@ -31,7 +31,7 @@ Run from the project root:
 ```bash
 comm -23 \
   <(find raw -maxdepth 1 -type f -name '*.md' | sort) \
-  <(awk -F'\t' '$1!~/^#/ && NF>=1 {print $1}' .claude/state/ingested.tsv | sort)
+  <(awk -F'\t' '$1!~/^#/ && NF>=1 {print $1}' .ingested.tsv | sort)
 ```
 
 Notes:
@@ -39,7 +39,7 @@ Notes:
 - `comm -23` = lines only in the first input. Requires both inputs sorted.
 - Filenames contain Chinese, colons, spaces — works fine in bash; do NOT add `xargs` without `-d '\n'` or you will split on whitespace.
 
-If `.claude/state/ingested.tsv` does not exist: report it and stop. Ask the user whether to create an empty one (header + zero rows) — do not auto-create, because an empty state file means "nothing has ever been ingested", which may not be true.
+If `.ingested.tsv` does not exist: report it and stop. Ask the user whether to create an empty one (header + zero rows) — do not auto-create, because an empty state file means "nothing has ever been ingested", which may not be true.
 
 **Step 2 — Report findings**
 
@@ -88,7 +88,7 @@ After the last file (or when the user says stop), report:
 
 | Situation | Handling |
 |---|---|
-| `.claude/state/ingested.tsv` missing | Stop, report, ask user how to bootstrap. Don't assume "nothing ingested". |
+| `.ingested.tsv` missing | Stop, report, ask user how to bootstrap. Don't assume "nothing ingested". |
 | State file lists a `raw/X.md` that no longer exists | Surface as warning ("state references missing raw/X.md") — likely renamed. Ask before editing the state file. |
 | Two raw files differ only by ` - 得到APP` suffix | Treat as two different files. The user's filename is authoritative. |
 | Raw file lacks the standard ` - 得到APP.md` suffix (e.g. `raw/能动：稳态生存的观念陷阱.md`) | Process normally. Suffix is descriptive, not required. |
@@ -99,7 +99,7 @@ After the last file (or when the user says stop), report:
 
 | Mistake | Fix |
 |---|---|
-| Writing to `.claude/state/ingested.tsv` from this skill | State writes belong to `/dedao-ingest`. This skill is a reader. |
+| Writing to `.ingested.tsv` from this skill | State writes belong to `/dedao-ingest`. This skill is a reader. |
 | Calling `/dedao-ingest` for file #2 before file #1's checkpoint completes | One source at a time. Wait. |
 | Skipping the Step 3 user-confirmation and auto-processing all | The user may want to triage by 板块 or postpone — ask. |
 | Suppressing the diff command's output and "summarizing" instead | Show the actual file list. The user needs to see it. |
@@ -108,7 +108,7 @@ After the last file (or when the user says stop), report:
 
 ## Red Flags — STOP
 
-- About to call `Write` / `Edit` on `.claude/state/ingested.tsv`
+- About to call `Write` / `Edit` on `.ingested.tsv`
 - About to call `/dedao-ingest` for the next file before the previous one finished
 - About to call `/dedao-ingest` without first showing the user the diff list
 - About to declare "all done" while skipping files without user consent

@@ -88,7 +88,7 @@ Per CLAUDE.md §8 format. Header MUST be parseable:
 ```
 `来源(1)` is always exactly `1`. Other counts vary, including 0.
 
-**Step 8 — Append to `.claude/state/ingested.tsv`**
+**Step 8 — Append to `.ingested.tsv`**
 This file is the canonical "已处理 raw 清单" used by `/dedao-scan` to diff. Append exactly one TAB-separated row, no quoting:
 ```
 <raw_path>\t<YYYY-MM-DD>\t<source_page>
@@ -133,7 +133,7 @@ Unlike some workflows, this project does not auto-commit on ingest. Leave the wo
 | Using English filenames or English headings | Page titles, filenames, and section headings are 中文; English goes in `aliases: []` only |
 | Committing without being asked | Step 10 — leave the diff for the user to review |
 | Filling in `## 我的反应` on the source page | That section is the user's; leave it blank |
-| Forgetting to append to `.claude/state/ingested.tsv` | Step 8 is mandatory — `/dedao-scan` depends on it to identify new files |
+| Forgetting to append to `.ingested.tsv` | Step 8 is mandatory — `/dedao-scan` depends on it to identify new files |
 | Re-writing or reordering existing rows in `ingested.tsv` | Append-only. If a prior row is wrong, surface it to the user; don't silently rewrite |
 | Forgetting `## 原文` in 来源 page | The page MUST be self-contained for static-HTML publish. `raw/` is not exposed. |
 | Normalizing `⼯` → `工` (or any special char) when copying backlinks | Add as alias instead. The raw spelling is what other raw files reference. |
@@ -146,8 +146,8 @@ Unlike some workflows, this project does not auto-commit on ingest. Leave the wo
 - About to call `Write` / `Edit` on a wiki file before the user has responded to the Step 3 checkpoint
 - About to call `Write` / `Edit` on anything under `raw/`
 - About to create `工具/X.md` without having grepped `aliases:` for X
-- About to finish without appending to `.claude/state/ingested.tsv`
-- About to rewrite or reorder rows in `.claude/state/ingested.tsv` (it is append-only)
+- About to finish without appending to `.ingested.tsv`
+- About to rewrite or reorder rows in `.ingested.tsv` (it is append-only)
 - About to write a 来源 page without `## 原文` section
 - About to "fix" `⼯` to `工` (or any other Unicode normalization) on a frontmatter backlink
 - About to leave a `https://piccdn2.umiwi.com/...` URL inline in `## 原文` instead of downloading
