@@ -29,14 +29,16 @@ The state file (`.ingested.tsv`) is the single source of truth for "已处理"�
 Run from the project root:
 
 ```bash
-comm -23 \
-  <(find raw -maxdepth 1 -type f -name '*.md' | sort) \
-  <(awk -F'\t' '$1!~/^#/ && NF>=1 {print $1}' .ingested.tsv | sort)
+LC_ALL=C comm -23 \
+  <(find raw -maxdepth 1 -type f -name '*.md' | LC_ALL=C sort) \
+  <(grep -v '^#' .ingested.tsv | cut -f1 | LC_ALL=C sort)
 ```
 
 Notes:
+- **`LC_ALL=C` is mandatory on all three commands** (the two `sort`s and `comm`). Default zh_CN.UTF-8 locale collation is non-deterministic across CJK strings — without `LC_ALL=C` the diff silently mismatches and can both miss truly-new files AND falsely flag already-ingested files. (Real incident, 2026-05-10: it hid 发刊词 and falsely surfaced 选择偏差.) Either all three are byte-sorted or none are; don't mix.
 - `-maxdepth 1` excludes `raw/assets/` (images, per CLAUDE.md §5).
-- `comm -23` = lines only in the first input. Requires both inputs sorted.
+- `comm -23` = lines only in the first input. Requires both inputs sorted (and sorted the SAME way — hence `LC_ALL=C` on every step).
+- Use `cut -f1` on the TSV (not `awk` with regex), since BSD `awk` on macOS chokes on `!~/regex/` syntax. The `grep -v '^#'` strips the header block first.
 - Filenames contain Chinese, colons, spaces — works fine in bash; do NOT add `xargs` without `-d '\n'` or you will split on whitespace.
 
 If `.ingested.tsv` does not exist: report it and stop. Ask the user whether to create an empty one (header + zero rows) — do not auto-create, because an empty state file means "nothing has ever been ingested", which may not be true.

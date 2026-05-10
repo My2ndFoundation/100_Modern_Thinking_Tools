@@ -1,6 +1,7 @@
 # DeDao-100 ingest state — append-only, written by /dedao-ingest.
 # Format: <raw_path>\t<YYYY-MM-DD>\t<source_page>
-# To diff: comm -23 <(find raw -maxdepth 1 -name '*.md' | sort) <(awk -F'\t' '$1!~/^#/{print $1}' .claude/state/ingested.tsv | sort)
+# To diff: LC_ALL=C comm -23 <(find raw -maxdepth 1 -type f -name '*.md' | LC_ALL=C sort) <(grep -v '^#' .ingested.tsv | cut -f1 | LC_ALL=C sort)
+# (LC_ALL=C is mandatory — default zh_CN locale collation breaks comm on CJK strings.)
 raw/叙事：这个宇宙的第一性原理 - 得到APP.md	2026-05-08	来源/叙事：这个宇宙的第一性原理.md
 raw/WOOP：从生活的默认设置中觉醒 - 得到APP.md	2026-05-08	来源/WOOP：从生活的默认设置中觉醒.md
 raw/主动高认知负荷：注意力的 Pro 模式 - 得到APP.md	2026-05-08	来源/主动高认知负荷：注意力的 Pro 模式.md
@@ -40,3 +41,4 @@ raw/状态杠杆：你不是不努力，你是没做在点子上 - 得到APP.md	
 raw/认知负荷理论：因为文具多，所以是差生 - 得到APP.md	2026-05-09	来源/认知负荷理论：因为文具多，所以是差生.md
 raw/选择偏差：就算无人说谎，你看到的也不是真实世界 - 得到APP.md	2026-05-09	来源/选择偏差：就算无人说谎，你看到的也不是真实世界.md
 raw/无免费午餐定理：诸行无常，有偏置才有决策 - 得到APP.md	2026-05-09	来源/无免费午餐定理：诸行无常，有偏置才有决策.md
+raw/发刊词：现代精英的思维武器库 - 得到APP.md	2026-05-10	来源/发刊词：现代精英的思维武器库.md

@@ -245,3 +245,9 @@
 - Orchestrator merged 9 worktrees into main: 安全感, 无免费午餐定理, 期权, 状态杠杆, 脆弱和反脆弱, 认知负荷理论, 贝叶斯先验, 赛道选择, 选择偏差; reconciled with 5 leaked-into-main lessons: 探索与利用, 概率分布, 非遍历性, 超级预测, 颗粒度和因果中介. Plus backfilled 场域 (来源 page existed but 万维钢/现代思维工具100讲/log/index entries were missing).
 - 万维钢 / 现代思维工具100讲 sources count = 39 (24 HEAD + 5 leaked + 10 from this batch).
 - ⚠️ Anomaly noted: `著作/Skin in the Game.md` (English title from a4f0 worktree) and `著作/非对称风险.md` (Chinese title from main untracked) refer to same Taleb book — left both files in place; deduplication left for next lint pass.
+
+## [2026-05-10] ingest | 发刊词：现代精英的思维武器库
+- 新建：来源(1) 工具(0) 概念(0) 人物(0) 著作(0)
+- 更新：万维钢、现代思维工具100讲、WOOP、OODA 环、探索与利用的权衡、古德哈特定律、自我决定理论、自由能、多臂老虎机问题、布里尔分数、复利、注意力、弱联系、共鸣、比较、正和博弈、心理安全、index.md
+- 备注：**概览性引用入库**——按用户特别指令，本讲是整门课的发刊词，里面对工具/概念的描述只是预告而非深源；不新建任何 stub，不修改已有页面内容部分，仅在 16 个已存在实体页（3 工具 + 12 概念 + 1 人物）的 `## 出现在` 追加引用行，并 bump `updated:` 与 `sources:`。本讲点名但 wiki 暂未建页的：刻意练习、微习惯、对称性破缺、目标函数、世界模型、反馈回路、预算带宽、元叙事、阿尔法、概率思维、边际分析——全部留给后续 60 讲做核心源。来源页含 slim 版摘要 + 完整 verbatim 原文。5 张图片本地化成功（3 png + 2 jpeg）。
+- ⚠️ `/dedao-scan` locale bug：用默认中文 locale 排序的 `comm -23` 漏报本讲为未处理文件，错把已 ingest 完整的 `选择偏差` 标为新文件。建议把扫描脚本改为 `LC_ALL=C sort` 与 `LC_ALL=C comm -23`。

@@ -2,8 +2,8 @@
 type: tool
 aliases: [Wish-Outcome-Obstacle-Plan, 愿望-结果-障碍-计划]
 created: 2026-05-08
-updated: 2026-05-08
-sources: 1
+updated: 2026-05-10
+sources: 2
 tags: [板块/人生成长战略]
 ---
 
@@ -38,3 +38,4 @@ tags: [板块/人生成长战略]
 
 ## 出现在
 - [[WOOP：从生活的默认设置中觉醒]]
+- [[发刊词：现代精英的思维武器库]]（仅作为引用——发刊词列其为最强 AI 反复使用的核心工具之一）
