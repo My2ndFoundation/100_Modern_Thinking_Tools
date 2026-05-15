@@ -1,10 +1,13 @@
 {
   "userIgnoreFilters": [
     "raw/",
+    "docs/",
     "_meta/",
     "CLAUDE.md",
     "README.md",
     "log.md",
-    "index.md"
+    "index.md",
+    "人物/万维钢.md",
+    "著作/现代思维工具100讲.md"
   ]
 }
