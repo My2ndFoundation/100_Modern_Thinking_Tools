@@ -11,6 +11,9 @@ tags: [板块/人生成长战略]
 ## 一句话定义
 [[加布里埃尔·厄廷根]]（Gabriele Oettingen）基于心理比对研究开发的四步工具：Wish（愿望）— Outcome（结果）— Obstacle（障碍）— Plan（计划），把愿望编译成 If-Then 的可执行代码，让恐惧变成行动的触发器。
 
+## 简介
+WOOP（Wish-Outcome-Obstacle-Plan）由德裔美国心理学家[[加布里埃尔·厄廷根]]（Gabriele Oettingen）基于其多年"心理比对"（Mental Contrasting）研究开发，结合了丈夫彼得·戈尔维策（Peter Gollwitzer）提出的"执行意图"（Implementation Intentions）理论，完整名称为 MCII（Mental Contrasting with Implementation Intentions） （[来源](https://en.wikipedia.org/wiki/Gabriele_Oettingen)）。其核心机制是：先正向想象目标实现后的美好结果（正面幻想），再直面阻碍目标实现的内心障碍（负面对比），这种"先正后负"的心理对比能够激活人将障碍与行动计划绑定的神经回路，从而把"如果遇到障碍 Y，就执行 Z"的 If-Then 规则自动化 （[来源](https://en.wikipedia.org/wiki/Gabriele_Oettingen)）。厄廷根的研究区分了"期望"与"幻想"对行为的截然不同影响，发现单纯的正向幻想反而会降低行动驱动力，而心理比对则是触发行为改变最有效的自我调节策略 （[来源](https://en.wikipedia.org/wiki/Gabriele_Oettingen)）。WOOP 的适用边界涵盖个人健康、学业表现、职业目标及关系管理等需要克服内心阻力的广泛场景。
+
 ## 来源
 - [[WOOP：从生活的默认设置中觉醒]]
 
