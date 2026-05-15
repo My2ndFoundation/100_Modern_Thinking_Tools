@@ -20,36 +20,46 @@ type: tool | concept | person | book | source
 aliases: [English name, alt names]
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
+verified: YYYY-MM-DD   # optional; date the page was source-verified by /dedao-verify
 sources: <integer count of sources mentioning this>
 tags: [板块/<section name>]
 ---
 ```
 
+`verified:` is added/maintained by `/dedao-verify` only (see §11). Absence means
+the page has not yet been source-verified.
+
 Standard sections by type:
 
 ### `工具/<name>.md`
 - 一句话定义
+- 简介 (encyclopedic summary from trusted sources — added/maintained by /dedao-verify, §11)
 - 来源 (which sources introduce/discuss it)
 - 何时使用
 - 操作步骤
 - 例子
 - 相关工具
 - 出现在 (auto-maintained list of source pages)
+- 外部参考 (2–4 trusted-source links — added/maintained by /dedao-verify, §11)
 
 ### `概念/<name>.md`
 - 一句话定义
+- 简介 (encyclopedic summary from trusted sources — added/maintained by /dedao-verify, §11)
 - 来源
 - 详细解释
 - 相关概念
 - 相关工具
 - 出现在
+- 外部参考 (2–4 trusted-source links — added/maintained by /dedao-verify, §11)
 
 ### `人物/<name>.md`
-- 简介 (one paragraph)
+- 简介 (one paragraph; this IS the person page's lead section — there is no separate
+  一句话定义. /dedao-verify revises/enriches this section in place, never adds a duplicate.)
 - 主要贡献
 - 相关概念
 - 相关著作
 - 在哪些课程出现
+- 外部参考 (2–4 trusted-source links — added/maintained by /dedao-verify, §11)
 
 ### `著作/<name>.md`
 - 作者: `[[…]]`
@@ -131,7 +141,9 @@ All type-specific section headings (`来源`, `何时使用`, etc., per §3) are
 
    Note: `来源(1)` is always exactly `1` because each ingest creates one source page; the other type counts vary.
 
-8. Report to user: number of pages touched, anything to revise.
+8. Report to user: number of pages touched, anything to revise. Suggest running
+   `/dedao-verify` afterwards to source-verify & enrich the new/updated entities
+   (§11) — ingest itself stays unchanged and does not block on this.
 
 ### 原文 insertion (Step 4)
 
@@ -238,7 +250,11 @@ User asks a question in chat.
 
 - Every claim links to its source page.
 - Training-data context must be marked `(*not from wiki*)`.
-- No silent web fallback. If wiki lacks something, surface it: log gap or ask before web-searching.
+- No silent web fallback **in query/ingest**. If the wiki lacks something, surface it:
+  log the gap or ask before web-searching. Exception: `/dedao-verify` (§11) is a
+  sanctioned online mode — web access there is expected and explicit, not a silent
+  fallback; its web-sourced facts are inline-cited with `（[来源](url)）`, not marked
+  `(*not from wiki*)`.
 
 ## 7. 工作流：lint
 
@@ -254,6 +270,9 @@ Checks:
 6. Broken wikilinks — `[[X]]` with no matching file.
 7. Frontmatter integrity — missing required fields, type mismatches, alias collisions.
 8. Index drift — `index.md` entries not matching real files.
+9. Unverified pages — 工具/概念/人物 pages with no `verified:` (or absent from `.verified.tsv`).
+10. Stale verification — pages whose `verified:` predates the newest cited source's
+    `updated:`, or unresolved `⚠️` flags from `/dedao-verify` in 溯源验证报告.md.
 
 Output a markdown report. Do NOT auto-fix. End the report with 3-5 suggested investigations or sources to seek out.
 
@@ -290,7 +309,7 @@ Append-only. Each entry begins with a parseable header so `grep "^## \[" log.md 
 - <detail line>
 ```
 
-Event types: `ingest`, `query`, `lint`, `synthesis-filed`, `schema-update`.
+Event types: `ingest`, `query`, `lint`, `synthesis-filed`, `schema-update`, `verify`.
 
 ## 9. 我不该做的事
 
@@ -304,6 +323,8 @@ Event types: `ingest`, `query`, `lint`, `synthesis-filed`, `schema-update`.
 - Normalize special characters in raw frontmatter backlinks (e.g. `⼯` → `工`). Add the raw form as an alias instead.
 - Leave external CDN image URLs (e.g. `piccdn2.umiwi.com`) inline in `## 原文` — always localize to `assets/<lesson-title>/NN.<ext>` per §5「图片本地化」.
 - Write into `raw/assets/` — that folder is for the user's Obsidian hotkey only. LLM-managed images go to root `assets/`.
+- Reorder/dedupe/rewrite prior rows in `.verified.tsv` — it is append-only (like `.ingested.tsv`). If a prior row is wrong, surface it; don't silently rewrite.
+- Silently overwrite a claim that contradicts a trusted source during `/dedao-verify`. Only obvious typos (拼写/年份/人名译名/机构名) get a direct fix with an inline `<!-- 溯源订正 … -->` note; genuine factual/interpretive divergence gets a `⚠️` flag with the source link, original kept, surfaced in 溯源验证报告.md.
 
 ## 10. 与你协作
 
@@ -311,3 +332,32 @@ Event types: `ingest`, `query`, `lint`, `synthesis-filed`, `schema-update`.
 - **Synthesis-filing offer**: when a query produces non-trivial output, I offer to file it back.
 - **Schema evolution**: when I notice a recurring pattern (e.g., a new page type emerging organically), I propose a `CLAUDE.md` update rather than silently changing my approach.
 - **One source at a time** by default. Batch ingest only on explicit request.
+
+## 11. 工作流：verify（溯源验证 + 内容充实）
+
+Trigger: user says "溯源"、"verify"、"核实"、`/dedao-verify`, or names a page under
+`工具/`、`概念/`、`人物/`. Owned by the `/dedao-verify` skill
+(`.claude/skills/dedao-verify/SKILL.md`); single-page SOP in
+`docs/agent-prompts/dedao-verify-page.md`; design in
+`docs/superpowers/specs/2026-05-15-dedao-verify-design.md`.
+
+Scope: `工具/`、`概念/`、`人物/` only (not `著作/`、`来源/`). Per page, against trusted
+sources (维基百科优先 en / 机构·官网·官方传记 / 同行评议期刊 / 可信新闻):
+
+1. Verify definition, attribution, years, key facts/formula; people pages also
+   生卒/国籍/机构/贡献/代表作.
+2. Obvious typo → direct fix + inline `<!-- 溯源订正 YYYY-MM-DD: 原作「X」，据 <url> 改为「Y」 -->`.
+   Factual/interpretive divergence → `> ⚠️ 与权威信源不同：…（[信源](url)）`, original kept.
+3. Add/maintain `## 简介` (encyclopedic summary, just below `## 一句话定义`; on 人物
+   pages the existing lead 简介 is revised in place — never duplicated).
+4. Fill genuinely thin standard sections (1–2 sourced paragraphs, each `（[来源](url)）`).
+5. Add/merge `## 外部参考` (2–4 trusted links).
+6. Frontmatter: bump `updated:`, set `verified:`; add authoritative English `aliases:`.
+
+State: append-only `.verified.tsv` (`<page>\t<date>\tverified`, header + diff recipe
+inside the file, like `.ingested.tsv`). Batch run = type-split batches ≤30 pages,
+waves ≤5 concurrent sub-agents; **pilot ~12 pages + user checkpoint before full run**
+when >~30 pages. Sub-agents touch only their batch pages — never `index.md`/`log.md`/
+`CLAUDE.md`/`.verified.tsv`/`raw/`. Orchestrator aggregates into `溯源验证报告.md`
+(订正表 + ⚠️ 清单 + 未能验证) and one `log.md` `verify` event. Never auto-commit;
+leave the tree dirty for review.
