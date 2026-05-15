@@ -2,7 +2,8 @@
 type: tool
 aliases: [OODA, OODA Loop, 观察-定向-决策-行动循环]
 created: 2026-05-09
-updated: 2026-05-10
+updated: 2026-05-15
+verified: 2026-05-15
 sources: 2
 tags: [板块/决策与行动]
 ---
@@ -27,6 +28,7 @@ tags: [板块/决策与行动]
 
 ## 例子
 - 中途岛海战：[[切斯特·尼米兹]] 用明码电报"AF 缺水"诱日军暴露目标；[[南云忠一]] 困在旧地图里反复换挂弹被反杀。
+> ⚠️ 与权威信源不同："AF缺水"诱敌方案实为情报官 Captain Wilfred Holmes 设计，尼米兹是授权者而非策划者。（[Battle of Midway — Wikipedia](https://en.wikipedia.org/wiki/Battle_of_Midway)）
 - Zara 三周完成"门店反馈→重设计→新品上架"，定向上不把数据压成一句话，保持颗粒度。
 - 乌克兰前线无人机：每次干扰偏离都成为后方 AI 的预测误差。
 
@@ -37,3 +39,9 @@ tags: [板块/决策与行动]
 ## 出现在
 - [[OODA 环：不是反应快，而是换脑快]]
 - [[发刊词：现代精英的思维武器库]]（仅作为引用——发刊词把 OODA 循环列为决策与判断板块的代表工具之一）
+
+## 外部参考
+- [OODA loop — Wikipedia](https://en.wikipedia.org/wiki/OODA_loop) — 百科全书
+- [John Boyd and The OODA Loop — PsychSafety](https://psychsafety.com/john-boyd-and-the-ooda-loop/) — 背景与应用
+- [The Tao of Boyd: How to Master the OODA Loop — Art of Manliness](https://www.artofmanliness.com/character/behavior/ooda-loop/) — 深度解析
+- [The OODA Loop — The Decision Lab](https://thedecisionlab.com/reference-guide/computer-science/the-ooda-loop) — 决策科学视角

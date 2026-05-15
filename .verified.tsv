@@ -1,3 +1,15 @@
 # DeDao-100 verify state — append-only, written by /dedao-verify.
 # Format: <wiki_page_path>\t<YYYY-MM-DD>\t<status>
 # To diff unverified: LC_ALL=C comm -23 <(find 工具 概念 人物 -maxdepth 1 -type f -name '*.md' | LC_ALL=C sort) <(grep -v '^#' .verified.tsv | cut -f1 | LC_ALL=C sort)
+工具/凯利公式.md	2026-05-15	verified
+工具/费米化.md	2026-05-15	verified
+工具/杠铃策略.md	2026-05-15	verified
+工具/OODA 环.md	2026-05-15	verified
+工具/WOOP.md	2026-05-15	verified
+工具/费曼学习法.md	2026-05-15	verified
+工具/事前验尸.md	2026-05-15	verified
+工具/红队.md	2026-05-15	verified
+工具/贝叶斯主义.md	2026-05-15	verified
+工具/参考类预测.md	2026-05-15	verified
+工具/刻意练习.md	2026-05-15	verified
+工具/期权.md	2026-05-15	verified
