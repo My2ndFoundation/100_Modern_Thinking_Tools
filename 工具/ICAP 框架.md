@@ -2,13 +2,17 @@
 type: tool
 aliases: [ICAP, Interactive-Constructive-Active-Passive]
 created: 2026-05-08
-updated: 2026-05-08
+updated: 2026-05-15
+verified: 2026-05-15
 sources: 1
 tags: [板块/人生成长战略]
 ---
 
 ## 一句话定义
 [[季清华]] 提出的学习方法分级：互动 > 建构 > 主动 > 被动 四种学习动作，在学习效果上严格递进——把认知参与推到当前条件下能承受的最高层。
+
+## 简介
+ICAP 框架由美国认知科学家 [[季清华]]（Michelene "Micki" T. H. Chi）提出，她现任亚利桑那州立大学 Regents 教授、Dorothy Bray 讲席教授，主持学习与认知实验室。框架雏形发表于 2009 年（Chi, 2009, *Topics in Cognitive Science*），2014 年与 Wylie 合作的正式论文将其命名为"ICAP 框架"并纳入第四类"被动"模式（[来源](https://www.tandfonline.com/doi/abs/10.1080/00461520.2014.965823)）。核心假设是：学生外显行为（被动 P → 主动 A → 建构 C → 互动 I）与认知参与深度一一对应，且 I > C > A > P 的学习效果严格递进（[来源](https://en.wikipedia.org/wiki/Michelene_Chi)）。框架适用范围为正式课堂与自主学习设计，不限学科；"被动"并非无效，而是新知引入阶段的合理起点。
 
 ## 来源
 - [[ICAP 框架：最高效的学习方法]]
@@ -36,3 +40,9 @@ tags: [板块/人生成长战略]
 
 ## 出现在
 - [[ICAP 框架：最高效的学习方法]]
+
+## 外部参考
+- [The ICAP Framework: Linking Cognitive Engagement to Active Learning Outcomes (Chi & Wylie, 2014)](https://www.tandfonline.com/doi/abs/10.1080/00461520.2014.965823) — 同行评议期刊论文（*Educational Psychologist*）
+- [Michelene Chi — Wikipedia](https://en.wikipedia.org/wiki/Michelene_Chi) — 百科传记
+- [ICAP Center for Teaching and Learning, Arizona State University](https://icap.education.asu.edu/) — 机构官网
+- [Active-Constructive-Interactive: A Conceptual Framework (Chi, 2009)](https://eric.ed.gov/?id=EJ1044018) — 原始期刊论文索引
