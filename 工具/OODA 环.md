@@ -2,9 +2,9 @@
 type: tool
 aliases: [OODA, OODA Loop, 观察-定向-决策-行动循环]
 created: 2026-05-09
-updated: 2026-05-15
+updated: 2026-05-26
 verified: 2026-05-15
-sources: 2
+sources: 3
 tags: [板块/决策与行动]
 ---
 
@@ -42,6 +42,7 @@ OODA 环由美国空军上校[[博伊德]]（John Boyd）在 1970 年代初创�
 ## 出现在
 - [[OODA 环：不是反应快，而是换脑快]]
 - [[发刊词：现代精英的思维武器库]]（仅作为引用——发刊词把 OODA 循环列为决策与判断板块的代表工具之一）
+- [[效果推理：不知道该干什么的时候该干什么]]（[[效应化]] 五原则连起来正是创业版 OODA 环）
 
 ## 外部参考
 - [OODA loop — Wikipedia](https://en.wikipedia.org/wiki/OODA_loop) — 百科全书

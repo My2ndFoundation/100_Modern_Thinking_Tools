@@ -2,9 +2,9 @@
 type: concept
 aliases: [认知优势, 优势]
 created: 2026-05-09
-updated: 2026-05-15
+updated: 2026-05-26
 verified: 2026-05-15
-sources: 1
+sources: 2
 tags: [板块/决策与行动]
 ---
 
@@ -26,12 +26,14 @@ Edge（认知优势）是投注/交易领域的核心量，表示在长期重复
 ## 相关概念
 - [[凯利公式]]
 - [[信息价值]]
+- [[阿尔法]]（金融语境的"超额收益"，与 edge 同源）
 
 ## 相关工具
 - [[凯利公式]]
 
 ## 出现在
 - [[凯利公式：乘法世界里的认知变现]]
+- [[阿尔法：优势战略意识]]（edge / Alpha：超出市场共识的优势）
 
 ## 外部参考
 - [Kelly criterion — Wikipedia](https://en.wikipedia.org/wiki/Kelly_criterion) — 百科全书（含 edge 的数学定义）

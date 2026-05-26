@@ -2,9 +2,9 @@
 type: concept
 aliases: [Fear of Missing Out, 害怕错过]
 created: 2026-05-09
-updated: 2026-05-15
+updated: 2026-05-26
 verified: 2026-05-15
-sources: 1
+sources: 2
 tags: [板块/决策与行动]
 ---
 
@@ -34,6 +34,7 @@ FOMO（Fear of Missing Out，害怕错过）这一概念由营销策略师 Dan H
 
 ## 出现在
 - [[信息价值：怎样区分沙子和金子]]
+- [[阿尔法：优势战略意识]]（人人追 AI 的 FOMO；有 Alpha 就不需要 FOMO）
 
 ## 外部参考
 - [Fear of missing out — Wikipedia](https://en.wikipedia.org/wiki/Fear_of_missing_out) — 百科全书（含词源与学术背景）
