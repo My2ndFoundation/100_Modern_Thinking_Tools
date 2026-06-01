@@ -378,6 +378,20 @@
 - [[战略定位]] — Strategic Positioning；做对手无法模仿的不同活动（Porter），Alpha 的来源，需取舍。
 - [[万物皆演进]] — Everything Evolves；沃德利地图核心假设：技术/实践沿四阶段不可逆商品化。
 - [[鲍莫尔成本病]] — Baumol's Cost Disease；进步部门涨薪拉动停滞部门，服务成本不可遏制上升。
+- [[平台]] — Platform；把"市场本身"变成自己的商品；靠算法决定谁被谁看见的终极捕食者。
+- [[双边市场]] — two-sided market；同时服务买卖双方、难启动易独大的市场结构（Rochet & Tirole 2003）。
+- [[间接网络效应]] — indirect network effects；一边用户多→另一边价值高的跨边正反馈；平台最强杠杆。
+- [[数据—算法反馈飞轮]] — 用户多→数据多→算法准→匹配好→用户更多的自我强化循环。
+- [[衰败化]] — Enshittification；多克托罗造词，平台三段堕落；2023 年度词汇。
+- [[技术封建主义]] — technofeudalism；瓦鲁法基斯：平台坐收云租、占山为王，取代资本主义。
+- [[零工经济]] — Gig economy；平台算法即时撮合短工的"灵活性幻觉"。
+- [[大数据杀熟]] — 平台用数据对不同人就同一商品展示不同价格的算法化价格歧视。
+- [[互操作性]] — interoperability；"携号转网"式拆墙立法，让用户带数据迁移、迫使平台竞争。
+- [[杰文斯悖论]] — Jevons Paradox；效率提高反而增加总消耗的反直觉规律（Jevons 1865）；自动化版本"AI 增加岗位"。
+- [[任务模型]] — task-based model；Acemoglu & Restrepo 2019；岗位是任务组合，AI 干掉的是任务。
+- [[替代效应]] — displacement effect；自动化挤压旧任务。
+- [[复职效应]] — reinstatement effect；新技术创造新任务、让劳动重新进入生产。
+- [[卢德分子]] — Luddites；19 世纪砸纺织机者，"自动化必失业"末日论的历史镜像。
 
 ## 人物 (People)
 
@@ -556,6 +570,14 @@
 - [[迈克尔·波特]] — Michael Porter；《什么是战略？》战略定位 vs 运营效益。
 - [[西蒙·沃德利]] — Simon Wardley；Fotango 前 CEO，沃德利地图发明者。
 - [[威廉·鲍莫尔]] — William J. Baumol；鲍莫尔成本病理论创立者，普林斯顿/NYU 经济学家。
+- [[科里·多克托罗]] — Cory Doctorow；加拿大科技思想家，造词 Enshittification（衰败化）。
+- [[雅尼斯·瓦鲁法基斯]] — Yanis Varoufakis；前希腊财长，提出技术封建主义。
+- [[蒂姆·吴]] — Tim Wu；"网络中立"提出者，著《The Age of Extraction》。
+- [[让·梯若尔]] — Jean Tirole；2014 诺奖，双边市场理论奠基（与 Rochet 合著）。
+- [[威廉·斯坦利·杰文斯]] — William Stanley Jevons；19 世纪英国经济学家，杰文斯悖论提出者，边际革命奠基人之一。
+- [[达里奥·阿莫迪]] — Dario Amodei；Anthropic CEO，AI 大失业末日论代表。
+- [[达龙·阿西莫格鲁]] — Daron Acemoglu；MIT 经济学家，2024 诺奖；任务模型与制度经济学。
+- [[黄仁勋]] — Jensen Huang；英伟达 CEO，"用 AI 扩张而非收缩"的杰文斯悖论代言人。
 
 ## 著作 (Books)
 
@@ -601,6 +623,10 @@
 - [[Remembering]] — Bartlett 1932；图式概念与建构性记忆研究的奠基作。
 - [[The Nature of Explanation]] — Craik 1943；首次系统提出心智模型概念。
 - [[鬼影地图]] — Steven Johnson 2006；The Ghost Map；伦敦霍乱与斯诺的现代流行病学开山之作。
+- [[Enshittification]] — Doctorow 2025；平台衰败化三阶段的系统专著。
+- [[Technofeudalism]] — Varoufakis 2023；论证平台云租取代资本主义。
+- [[The Age of Extraction]] — Tim Wu 2025；大科技平台如何征服经济、威胁未来繁荣。
+- [[煤炭问题]] — Jevons 1865；The Coal Question；杰文斯悖论的原型论证。
 
 ## 来源 (Sources)
 
@@ -659,3 +685,5 @@
 - [[阿尔法：优势战略意识]] — 2026-05-26 ingested
 - [[沃德利地图：独一无二的自己做，能外包的尽量外包]] — 2026-05-29 ingested
 - [[鲍莫尔成本病：物便宜则人贵]] — 2026-05-29 ingested
+- [[平台：现代世界最厉害的商业模式]] — 2026-06-01 ingested
+- [[杰文斯悖论：AI 会增加人的工作岗位]] — 2026-06-01 ingested
