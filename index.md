@@ -55,6 +55,7 @@
 - [[机会窗口]] — Window of opportunity；从主导类别出现到主导设计出现的入场期（Suarez 2015）。
 - [[自主支持]] — Autonomy-Supportive Parenting；让孩子做"发起者"+渐进式退出，反对献祭式养育。
 - [[沃德利地图]] — Wardley Mapping；价值链可见度×演进阶段坐标系，判断哪些自建哪些外包。
+- [[可托付性]] — Entrustability；公司用高薪购买的能力：把焦虑压缩成可判断/可执行/可负责的局面。
 
 ## 概念 (Concepts)
 
@@ -392,6 +393,9 @@
 - [[替代效应]] — displacement effect；自动化挤压旧任务。
 - [[复职效应]] — reinstatement effect；新技术创造新任务、让劳动重新进入生产。
 - [[卢德分子]] — Luddites；19 世纪砸纺织机者，"自动化必失业"末日论的历史镜像。
+- [[科举思维]] — 把世界当大考场、公司当颁奖机构的错误思维；与商业/市场思维相对。
+- [[不确定性溢价]] — Uncertainty Premium；高薪不是优秀奖，而是承担不确定性的回报（奈特利润理论的工资版）。
+- [[极端所有权]] — Extreme Ownership；I own this，出问题不甩锅（海豹突击队领导原则）。
 
 ## 人物 (People)
 
@@ -578,6 +582,9 @@
 - [[达里奥·阿莫迪]] — Dario Amodei；Anthropic CEO，AI 大失业末日论代表。
 - [[达龙·阿西莫格鲁]] — Daron Acemoglu；MIT 经济学家，2024 诺奖；任务模型与制度经济学。
 - [[黄仁勋]] — Jensen Huang；英伟达 CEO，"用 AI 扩张而非收缩"的杰文斯悖论代言人。
+- [[蒂姆·库克]] — Tim Cook；苹果 CEO，供应链管理即"最高级的不确定性压缩"。
+- [[乔科·威林克]] — Jocko Willink；美军海豹突击队军官，《Extreme Ownership》合著者。
+- [[莱夫·巴宾]] — Leif Babin；美军海豹突击队军官，《Extreme Ownership》合著者。
 
 ## 著作 (Books)
 
@@ -627,6 +634,9 @@
 - [[Technofeudalism]] — Varoufakis 2023；论证平台云租取代资本主义。
 - [[The Age of Extraction]] — Tim Wu 2025；大科技平台如何征服经济、威胁未来繁荣。
 - [[煤炭问题]] — Jevons 1865；The Coal Question；杰文斯悖论的原型论证。
+- [[风险、不确定性与利润]] — Knight 1921；利润来自承担不确定性，区分风险与不确定性。
+- [[Extreme Ownership]] — Willink & Babin 2015；极端所有权领导原则。
+- [[未来就业报告2025]] — WEF；雇主最看重软实力前三：分析性思维/韧性/领导力与社会影响。
 
 ## 来源 (Sources)
 
@@ -687,3 +697,4 @@
 - [[鲍莫尔成本病：物便宜则人贵]] — 2026-05-29 ingested
 - [[平台：现代世界最厉害的商业模式]] — 2026-06-01 ingested
 - [[杰文斯悖论：AI 会增加人的工作岗位]] — 2026-06-01 ingested
+- [[托付：世界奖励把不确定性变成确定性的人]] — 2026-06-03 ingested
