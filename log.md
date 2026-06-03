@@ -437,3 +437,20 @@
 - 原创术语：可托付性/科举思维/不确定性溢价 外部无权威词条，简介按 §6 标 (*not from wiki*)，理论根基挂 Knight 1921 / 科举制度史
 - 编排：ultracode Workflow wf_f1f2e308-049（Phase1 并发 3 个类型批 verify agent，Phase2 每页 1 个对抗式审计 agent 逐链 WebFetch + 查简介事实落源）；裁决 clean 4 / minor 3 / major 0，3 处 minor 全由 orchestrator 落地修复并复核
 - 报告：[[溯源验证报告]]
+
+## [2026-06-03] ingest | 地位：社会参与的第一性原理
+- 新建：来源(1) 工具(2) 概念(7) 人物(5) 著作(0)
+- 新建工具：地位（Social Status）、能力与温暖（Warmth & Competence / 刻板印象内容模型）
+- 新建概念：社会计量器理论（含自尊/self-esteem 作 alias 并入）、本地阶梯效应、同辈排名、支配与声望、二阶效应、地位饥饿、蔑视
+- 新建人物：马克·利里（Mark Leary）、约瑟夫·亨里奇（Joseph Henrich）、约翰·戈特曼（John Gottman）、苏珊·菲斯克（Susan Fiske）、卡梅伦·安德森（Cameron Anderson）
+- 更新：概念/第一性原理.md（来源+出现在，sources 2→3，+板块/社会与经济）；概念/零和博弈.md（来源+出现在+相关概念[[地位]]，sources 1→2）；概念/正反馈过程.md（出现在+相关概念[[同辈排名]]，sources 2→3）；概念/信号筛选.md（详细解释新增"地位信号的二阶代价"段+出现在+相关概念，sources 1→2）；人物/万维钢.md（在哪些课程出现+板块/社会与经济，sources 43→44）
+- 备注：「社会与经济」模块开篇（板块/社会与经济，本 wiki 该板块第一篇）。5 张图已本地化至 assets/地位：社会参与的第一性原理/（01–04 来自 CDN 路径 2026060322，05 来自 2026060315），全部下载成功、无失败。frontmatter backlink「万维钢·现代思维⼯具100讲」(U+2F2F 偏旁) 经现有 alias 解析，未规范化。决策：地位归工具（仿 [[叙事]] 先例）；自尊不单独建页、作 alias 并入社会计量器理论；苏珊·菲斯克/卡梅伦·安德森虽仅注释引用仍建页（被引研究者惯例）。著作 0 新建——13 篇文献（含 Gottman《What Predicts Divorce?》1994）在来源页 ### 注释 及相关概念页内联引用。单向交叉链接 [[人际关系逻辑]]/[[声望资本]]/[[名校效应]]/[[分组选拔偏差]] 由新页指出，未改对方页。建议后续 /dedao-verify 溯源新增 2 工具 + 7 概念 + 5 人物。
+
+## [2026-06-03] verify | 地位讲带入的 14 新实体
+- 验证：工具(2) 概念(7) 人物(5)；14/14 verified、error 0、skipped 0
+- 订正：1 处（[[卡梅伦·安德森]] Haas 讲席「Lorraine Tyson Mitchell Chair」→「Lorraine Tyson Mitchell Chair in Leadership & Communication II」，源自 haas.berkeley.edu 官方页）
+- ⚠️ 0 硬分歧；补 14 简介 + 7 处主要贡献/相关著作扩写；外部参考约 47 条
+- 原创术语标注：[[地位]]（万维钢"第一性原理"提法 *not from wiki*，挂 Anderson 2015）、[[二阶效应]]（万维钢用法 *not from wiki*，挂学界 higher-order beliefs / Howard Marks）、[[地位饥饿]]（万维钢用法 *not from wiki*，挂 status anxiety / Frank 1985）
+- aliases 补齐：Status / Sociometric Status / Warmth-Competence Model / SCM / sociometer / local-ladder effect / Ordinal Rank / status anxiety / contempt / Four Horsemen / Mark Richard Leary / Joseph Patrick Henrich / Susan Tufts Fiske 等
+- 编排：3 个 sub-agent 并发（按类型分批：工具×1、概念×1、人物×1），单波次完成；总页数 < 30 阈值，无需 pilot 检查点
+- 报告：[[溯源验证报告]]（# 2026-06-03 verify 段）
