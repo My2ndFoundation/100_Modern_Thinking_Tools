@@ -44,7 +44,7 @@ description = "Local MCP server exposing the DeDao-100 wiki for content creation
 requires-python = ">=3.10"
 dependencies = ["mcp>=1.2", "pyyaml>=6"]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = ["pytest>=8"]
 
 [project.scripts]
