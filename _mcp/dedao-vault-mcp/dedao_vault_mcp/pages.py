@@ -21,7 +21,7 @@ class Page:
 
 
 def parse_frontmatter(text: str) -> tuple[dict, str]:
-    if text.startswith("---"):
+    if text.startswith("---\n"):
         parts = text.split("---", 2)
         if len(parts) >= 3:
             fm = yaml.safe_load(parts[1]) or {}
@@ -31,7 +31,7 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
     return {}, text
 
 
-def parse_sections(body: str) -> dict:
+def parse_sections(body: str) -> dict[str, str]:
     sections: dict[str, str] = {}
     current = None
     buf: list[str] = []

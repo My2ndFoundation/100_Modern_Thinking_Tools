@@ -54,3 +54,31 @@ def test_parse_page(tmp_path):
     assert page.type == "tool"
     assert "Narrative" in page.aliases
     assert page.outlinks == ["叙事权", "认知解耦"]
+
+
+def test_parse_frontmatter_preserves_body_horizontal_rule():
+    text = "---\ntype: tool\n---\n\nintro\n\n---\n\nmore\n"
+    fm, body = parse_frontmatter(text)
+    assert fm["type"] == "tool"
+    assert "intro" in body and "more" in body and "---" in body
+
+
+def test_parse_frontmatter_ignores_non_leading_delimiter():
+    text = "----not frontmatter\nbody\n"
+    fm, body = parse_frontmatter(text)
+    assert fm == {}
+    assert body == text
+
+
+def test_one_liner_falls_back_to_jianjie():
+    assert one_liner({"简介": "首行。\n后续行。"}) == "首行。"
+
+
+def test_one_liner_empty_when_no_sections():
+    assert one_liner({}) == ""
+
+
+def test_parse_page_tags(tmp_path):
+    p = tmp_path / "叙事.md"
+    p.write_text(DOC, encoding="utf-8")
+    assert "板块/基本世界观" in parse_page(p).tags
