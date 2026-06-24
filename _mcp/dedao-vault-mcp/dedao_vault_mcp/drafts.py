@@ -37,11 +37,12 @@ def save_draft(creation_root, column, format, title, body, covers,
     d.mkdir(parents=True, exist_ok=True)
     date = today or datetime.date.today().isoformat()
     path = d / f"{date}-{slugify(title)}.md"
-    fm = {
-        "type": "draft", "column": column, "format": format,
-        "language": language, "covers": list(covers),
-        "status": "pending-review", "created": date,
-    }
+    fm = {"type": "draft", "column": column, "format": format}
+    if language is not None:
+        fm["language"] = language
+    fm["covers"] = list(covers)
+    fm["status"] = "pending-review"
+    fm["created"] = date
     used = "\n".join(f"- {c}" for c in covers)
     content = (
         f"{_frontmatter_block(fm)}\n\n{body}\n\n"
@@ -58,7 +59,10 @@ def list_drafts(creation_root, column=None, limit: int = 50):
     if column:
         if column.startswith("_"):
             return []
-        dirs = [root / column]
+        try:
+            dirs = [_safe_dir(creation_root, column)]
+        except ValueError:
+            return []
     else:
         dirs = [p for p in root.iterdir() if p.is_dir() and not p.name.startswith("_")]
     out = []

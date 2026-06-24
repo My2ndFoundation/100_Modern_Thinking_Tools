@@ -54,3 +54,11 @@ def test_list_drafts_skips_underscore_column(tmp_path):
     c.mkdir()
     save_draft(c, "uk", "social", "X", "b", ["[[叙事]]"], today="2026-06-20")
     assert list_drafts(c, column="_prompts") == []
+
+
+def test_list_drafts_rejects_traversal_column(tmp_path):
+    c = tmp_path / "创作"
+    c.mkdir()
+    (tmp_path / "工具").mkdir()
+    (tmp_path / "工具" / "secret.md").write_text("---\ncolumn: x\n---\nbody\n", encoding="utf-8")
+    assert list_drafts(c, column="../工具") == []

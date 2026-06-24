@@ -19,6 +19,6 @@ columns:
     format: social
     language: zh
     topic_mode: rotation
-    topic_filter: { type: tool, tag: 板块/决策 }
+    topic_filter: { type: tool, tag: 板块/决策与行动 }
     length: 300字以内
     extras: 带3个话题标签

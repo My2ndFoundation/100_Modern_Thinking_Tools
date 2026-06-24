@@ -14,7 +14,7 @@ Steps:
 2. Decide the topic:
    - If I supplied "Topic: X" in this message, use X.
    - Else, since topic_mode is "rotation", call
-     pick_topics(mode="unused", type="tool", tag="板块/决策", exclude_written=true) —
+     pick_topics(mode="unused", type="tool", tag="板块/决策与行动", exclude_written=true) —
      "rotation" 表示轮换尚未写过的工具，对应 "unused" 模式 — 并挑选最合适的一个。
    - (If I instead supplied "Hotspot: Y", web-search to understand Y, then
      search_pages to find tools/concepts that resonate with it.)
