@@ -14,9 +14,11 @@ def slugify(title: str) -> str:
 
 
 def _safe_dir(creation_root, column: str) -> Path:
+    if not column or not column.strip():
+        raise ValueError("path_rejected")
     root = Path(creation_root).resolve()
     target = (root / column).resolve()
-    if target != root and root not in target.parents:
+    if target == root or root not in target.parents:
         raise ValueError("path_rejected")
     return target
 
@@ -54,6 +56,8 @@ def list_drafts(creation_root, column=None, limit: int = 50):
     if not root.exists():
         return []
     if column:
+        if column.startswith("_"):
+            return []
         dirs = [root / column]
     else:
         dirs = [p for p in root.iterdir() if p.is_dir() and not p.name.startswith("_")]

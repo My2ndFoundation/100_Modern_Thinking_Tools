@@ -35,3 +35,22 @@ def test_list_drafts_newest_first(tmp_path):
     drafts = list_drafts(c)
     assert drafts[0]["created"] == "2026-06-20"
     assert drafts[0]["covers"] == ["[[认知解耦]]"]
+
+
+def test_save_draft_rejects_empty_column(tmp_path):
+    c = tmp_path / "创作"
+    c.mkdir()
+    assert save_draft(c, "", "social", "x", "b", [], today="2026-06-24")["error"] == "path_rejected"
+
+
+def test_save_draft_rejects_dot_column(tmp_path):
+    c = tmp_path / "创作"
+    c.mkdir()
+    assert save_draft(c, ".", "social", "x", "b", [], today="2026-06-24")["error"] == "path_rejected"
+
+
+def test_list_drafts_skips_underscore_column(tmp_path):
+    c = tmp_path / "创作"
+    c.mkdir()
+    save_draft(c, "uk", "social", "X", "b", ["[[叙事]]"], today="2026-06-20")
+    assert list_drafts(c, column="_prompts") == []
