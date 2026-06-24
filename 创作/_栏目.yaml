@@ -1,0 +1,24 @@
+columns:
+  - id: thinking-tools-uk
+    name: Thinking Tools (UK)
+    audience: UK-based lifelong learners on LinkedIn
+    voice: clear, friendly, one practical takeaway each
+    platform: LinkedIn
+    format: social          # social | longform | script
+    language: en-GB         # default; set zh to override
+    topic_mode: rotation    # given | auto | hotspot | rotation
+    topic_filter: { type: tool }
+    length: under 150 words
+    extras: end with one reflective question
+
+  - id: daily-tool-zh
+    name: 每日一个思维工具
+    audience: 关注个人成长的职场年轻人
+    voice: 口语、有梗、每条带一个可立刻用的动作
+    platform: 小红书
+    format: social
+    language: zh
+    topic_mode: rotation
+    topic_filter: { type: tool, tag: 板块/决策 }
+    length: 300字以内
+    extras: 带3个话题标签
