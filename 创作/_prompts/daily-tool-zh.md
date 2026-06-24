@@ -13,9 +13,9 @@ Steps:
    write entirely in Chinese.
 2. Decide the topic:
    - If I supplied "Topic: X" in this message, use X.
-   - Else, since topic_mode is rotation, call
-     pick_topics("rotation"... use type=tool and tag=板块/决策 from topic_filter,
-     exclude_written=true) and choose the single best candidate.
+   - Else, since topic_mode is "rotation", call
+     pick_topics(mode="unused", type="tool", tag="板块/决策", exclude_written=true) —
+     "rotation" 表示轮换尚未写过的工具，对应 "unused" 模式 — 并挑选最合适的一个。
    - (If I instead supplied "Hotspot: Y", web-search to understand Y, then
      search_pages to find tools/concepts that resonate with it.)
    - Call list_drafts("daily-tool-zh") to avoid repeating a recent topic.
@@ -31,6 +31,7 @@ Steps:
 5. Call save_draft(column="daily-tool-zh", format="social", title=...,
    body=..., covers=[every wiki page you used], language="zh").
 6. Report: title, saved path, pages used, and one sentence on why this topic.
+   若候选选题看起来过时，先调 refresh_index，再重新 pick_topics。
 
 Constraints: use only knowledge-base content (web search ONLY in hotspot mode,
 and only to understand the hotspot). Do not publish — only save the draft.
