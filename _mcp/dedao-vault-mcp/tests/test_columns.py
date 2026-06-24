@@ -46,3 +46,22 @@ def test_get_column_found_and_missing(tmp_path):
 def test_missing_file(tmp_path):
     (tmp_path / "创作").mkdir()
     assert load_columns(tmp_path / "创作")["error"] == "columns_file_missing"
+
+
+def test_yaml_error(tmp_path):
+    c = tmp_path / "创作"
+    c.mkdir()
+    (c / "_栏目.yaml").write_text("columns: [1, 2", encoding="utf-8")
+    assert load_columns(c)["error"] == "yaml_error"
+
+
+def test_list_columns_passes_error_through(tmp_path):
+    c = tmp_path / "创作"
+    c.mkdir()
+    assert list_columns(c)["error"] == "columns_file_missing"
+
+
+def test_get_column_passes_error_through(tmp_path):
+    c = tmp_path / "创作"
+    c.mkdir()
+    assert get_column(c, "x")["error"] == "columns_file_missing"
