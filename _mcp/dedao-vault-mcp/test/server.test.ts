@@ -2,7 +2,7 @@
 import { describe, it, expect } from "vitest";
 import * as path from "node:path";
 import { makeTools } from "../src/tools";
-import { createContext } from "../src/server";
+import { createContext, createServer } from "../src/server";
 import { saveDraft } from "../src/drafts";
 import { createFakeVault } from "./fixtures";
 
@@ -33,5 +33,11 @@ describe("server tools", () => {
     const refresh = makeTools(ctx).find((t) => t.name === "refresh_index")!;
     const out = await refresh.handler({});
     expect((out as any).pages_indexed).toBeGreaterThan(0);
+  });
+
+  it("createServer registers all tools without throwing", () => {
+    process.env.DEDAO_VAULT_ROOT = createFakeVault();
+    const ctx = createContext();
+    expect(() => createServer(ctx)).not.toThrow();
   });
 });

@@ -1,7 +1,7 @@
 // src/tools.ts
 import { z, type ZodRawShape } from "zod";
 import {
-  VaultIndex, buildIndex, search, pageView, backlinksView, relatedView, resolve,
+  VaultIndex, search, pageView, backlinksView, relatedView, resolve,
 } from "./vaultIndex";
 import { pickTopics } from "./topics";
 import { listColumns, getColumn } from "./columns";

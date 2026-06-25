@@ -23,10 +23,14 @@ export function createContext(): Ctx {
 export function createServer(ctx: Ctx): McpServer {
   const server = new McpServer({ name: "dedao-vault", version: "0.1.0" });
   for (const def of makeTools(ctx)) {
-    server.tool(def.name, def.description, def.inputSchema, async (args: any) => {
-      const result = await def.handler(args);
-      return { content: [{ type: "text" as const, text: JSON.stringify(result) }] };
-    });
+    server.registerTool(
+      def.name,
+      { title: def.title, description: def.description, inputSchema: def.inputSchema },
+      async (args: any) => {
+        const result = await def.handler(args);
+        return { content: [{ type: "text" as const, text: JSON.stringify(result) }] };
+      },
+    );
   }
   return server;
 }
