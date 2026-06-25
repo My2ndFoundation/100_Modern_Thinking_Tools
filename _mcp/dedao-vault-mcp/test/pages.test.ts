@@ -69,6 +69,13 @@ describe("pages", () => {
     expect(body).toBe(text);
   });
 
+  it("parseFrontmatter treats half-open frontmatter (no closing fence) as no frontmatter", () => {
+    const text = "---\ntype: tool\nno closing fence\n";
+    const [fm, body] = parseFrontmatter(text);
+    expect(fm).toEqual({});
+    expect(body).toBe(text);
+  });
+
   it("parsePage", () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "p-"));
     const fp = path.join(dir, "叙事.md");

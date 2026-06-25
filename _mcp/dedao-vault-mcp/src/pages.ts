@@ -14,6 +14,7 @@ export interface Page {
   outlinks: string[];
 }
 
+// Use only with String.prototype.matchAll (never .exec()) — a shared /g regex carries lastIndex across exec calls.
 export const WIKILINK_RE = /\[\[([^\]]+)\]\]/g;
 
 function splitN(s: string, sep: string, n: number): string[] {
