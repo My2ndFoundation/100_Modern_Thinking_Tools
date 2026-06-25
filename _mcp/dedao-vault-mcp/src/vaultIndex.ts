@@ -82,12 +82,17 @@ function similarity(a: string, b: string): number {
 
 function suggest(index: VaultIndex, name: string, k = 5): string[] {
   const q = name.toLowerCase();
-  return [...index.aliasIndex.keys()]
+  const ranked = [...index.aliasIndex.keys()]
     .map((key) => [key, similarity(q, key)] as [string, number])
     .filter(([, s]) => s >= 0.6)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, k)
-    .map(([key]) => key);
+    .sort((a, b) => b[1] - a[1]);
+  const out: string[] = [];
+  for (const [key] of ranked) {
+    const canon = index.aliasIndex.get(key);
+    if (canon && !out.includes(canon)) out.push(canon);
+    if (out.length >= k) break;
+  }
+  return out;
 }
 
 function byName(a: string, b: string): number {

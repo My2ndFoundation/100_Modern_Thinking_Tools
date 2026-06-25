@@ -39,6 +39,7 @@ describe("vaultIndex", () => {
     const out = pageView(idx, "叙事x") as any;
     expect(out.error).toBe("not_found");
     expect(Array.isArray(out.suggestions)).toBe(true);
+    expect(out.suggestions).toContain("叙事");
   });
 
   it("backlinks include section and source links", () => {
@@ -52,5 +53,6 @@ describe("vaultIndex", () => {
     const idx = buildIndex(createFakeVault());
     const rel = Object.fromEntries((relatedView(idx, "叙事") as any[]).map((r) => [r.name, r.reason]));
     expect("认知解耦" in rel).toBe(true);
+    expect(rel["认知解耦"]).toBe("section:相关工具");
   });
 });
