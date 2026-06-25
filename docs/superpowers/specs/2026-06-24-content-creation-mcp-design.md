@@ -260,10 +260,29 @@ spec 实现阶段为 `创作/_栏目.yaml` 里每个栏目生成一份占位已�
 - **D4** 单一参数化主 prompt（按栏目配置自适应），不做格式×选题×语言的组合爆炸。
 - **D5** 输出默认 en-GB（雅思 6.5），栏目可设 `zh` 覆盖；交付的 prompt 模板用英文写。
 - **D6** 定时/触发不在范围内，由用户在 Claude Desktop 手动设 task 触发。
-- **语言**：MCP 语言 = Python（`mcp` SDK，文本处理顺手，无 JS 依赖）。
+- **D7（2026-06-25 改造）** MCP 语言由 Python 改为 **TypeScript**（运行时 **bun**，测试 **vitest**）。
+  原 Python 实现整体删除，见 §9。
+- ~~**语言**：MCP 语言 = Python~~（已被 D7 取代）。
 
 ## 8. 里程碑
 1. **M1 — MCP 地基**：索引 + 检索三件套（`search_pages`/`get_page`/`get_backlinks`/`get_related`）+ 测试。
 2. **M2 — 选题与草稿**：`pick_topics`（5 模式 + 去重）+ `save_draft`/`list_drafts`（路径强校验）+ `columns` + 测试。
 3. **M3 — 接线与 prompt**：`README` 接线说明 + `创作/_栏目.yaml` 初始栏目 + 主 prompt 模板 + 每栏目实例 prompt。
 4. **M4 — 端到端试跑**：在 Claude Desktop 手动触发，产出 1 篇 en-GB social 草稿，按观感微调文风档。
+
+## 9. TypeScript 实现说明（2026-06-25 改造）
+
+需求、工具面、边界、栏目/文风/prompt **完全不变**——仅把 MCP 服务从 Python 换成 TypeScript。
+
+- **运行时/包管理**：bun（直接执行 `.ts`，无 tsc 构建步骤）。**测试**：vitest（`bunx vitest run`）。
+- **SDK**：`@modelcontextprotocol/sdk`（`McpServer` + `registerTool(name,{title,description,inputSchema:zod},handler)` + `StdioServerTransport`）；输入校验用 `zod`；YAML 用 `yaml` 包。
+- **旧 Python 实现整体删除**（`_mcp/dedao-vault-mcp/` 原内容），TS 实现占用同一路径。
+- **`创作/` 层不变**：`_栏目.yaml`、`_prompts/*.md`、`创作/README.md` 与实现语言无关，原样保留（prompt 里引用的工具名 TS 版完全一致）。仅 `_mcp/dedao-vault-mcp/README.md` 改为 bun 接线。
+- **TS 模块（对应 §4.5 的 Python 模块）**：
+  `src/config.ts`（WIKI_FOLDERS / CREATION_FOLDER / resolveRoot）、`src/pages.ts`、`src/vaultIndex.ts`
+  （search/backlinks/related）、`src/topics.ts`、`src/columns.ts`、`src/drafts.ts`、
+  `src/tools.ts`（`makeTools(ctx)` 返回 10 个工具定义——纯逻辑，便于测试）、`src/server.ts`（McpServer 接线 + main + stdio）。
+- **架构微调（优于 Python 版）**：工具实现（`tools.ts` 的 `makeTools(ctx)` 返回 `{name,title,description,inputSchema,handler}[]`）与 MCP 接线（`server.ts` 遍历注册、把 handler 结果包成 `{content:[{type:"text",text:JSON.stringify(...)}]}`）分离。测试直接对 `makeTools` 的 handler 断言，无需 McpServer 内省或 env-reload（替代 Python 的 module-global + importlib.reload）。
+- **路径围栏（`safeDir`）**：`path.resolve` 后用 `path.relative(root,target)` 判定——`rel===""` 或以 `..` 开头或 `path.isAbsolute(rel)` 即拒绝（等价于「严格子目录」，跨平台）。
+- **Claude Desktop 接线**：`command: "bun"`，`args: ["<abs>/_mcp/dedao-vault-mcp/src/server.ts"]`，`env: { DEDAO_VAULT_ROOT: "<vault abs>" }`。
+- **工具返回**：以 `{content:[{type:"text",text:JSON.stringify(result)}]}` 文本承载 JSON（不强制 outputSchema），与 Python 版的 dict/list 返回等价。
