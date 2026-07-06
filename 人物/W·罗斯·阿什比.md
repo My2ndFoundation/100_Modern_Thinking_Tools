@@ -2,9 +2,9 @@
 type: person
 aliases: [W. Ross Ashby, William Ross Ashby, 阿什比]
 created: 2026-05-09
-updated: 2026-05-15
+updated: 2026-07-06
 verified: 2026-05-15
-sources: 1
+sources: 2
 tags: [板块/决策与行动]
 ---
 
@@ -17,12 +17,15 @@ tags: [板块/决策与行动]
 
 ## 相关概念
 - [[好调节器定理]]
+- [[必要多样性定律]]
 - [[模型]]
 
 ## 相关著作
+- [[控制论导论]]（An Introduction to Cybernetics, 1956）
 
 ## 在哪些课程出现
 - [[颗粒度和因果中介：用模型思考]]
+- [[组织资本：怎样让 1 + 1 > 2]]（必要多样性定律：内部多样性要匹配外部复杂度）
 
 ## 外部参考
 - [W. Ross Ashby — Wikipedia](https://en.wikipedia.org/wiki/W._Ross_Ashby) — 百科全书
